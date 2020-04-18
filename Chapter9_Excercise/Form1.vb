@@ -120,7 +120,7 @@ Public Class Form1
     'Sub routine to handle selecting items in listbox
     Private Sub ListBoxOutput_selectedtext() Handles MemberListBox.SelectedIndexChanged
 
-        '
+        'Set variables based on selected item in listbox
         nameTextBoxArray = MemberListBox.SelectedIndex
         phoneTextBoxArray = MemberListBox.SelectedIndex
 

@@ -25,7 +25,6 @@ Partial Class Form1
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.NameBox = New System.Windows.Forms.TextBox()
-        Me.PhoneBox = New System.Windows.Forms.TextBox()
         Me.MemberListBox = New System.Windows.Forms.ListBox()
         Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModifyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -33,6 +32,7 @@ Partial Class Form1
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenu = New System.Windows.Forms.MenuStrip()
+        Me.PhoneBox = New System.Windows.Forms.MaskedTextBox()
         Me.ToolStripMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,13 +60,6 @@ Partial Class Form1
         Me.NameBox.Name = "NameBox"
         Me.NameBox.Size = New System.Drawing.Size(100, 26)
         Me.NameBox.TabIndex = 2
-        '
-        'PhoneBox
-        '
-        Me.PhoneBox.Location = New System.Drawing.Point(291, 451)
-        Me.PhoneBox.Name = "PhoneBox"
-        Me.PhoneBox.Size = New System.Drawing.Size(100, 26)
-        Me.PhoneBox.TabIndex = 3
         '
         'MemberListBox
         '
@@ -122,31 +115,38 @@ Partial Class Form1
         Me.ToolStripMenu.TabIndex = 7
         Me.ToolStripMenu.Text = "MenuStrip1"
         '
+        'PhoneBox
+        '
+        Me.PhoneBox.Location = New System.Drawing.Point(291, 451)
+        Me.PhoneBox.Mask = "000-0000"
+        Me.PhoneBox.Name = "PhoneBox"
+        Me.PhoneBox.Size = New System.Drawing.Size(100, 26)
+        Me.PhoneBox.TabIndex = 8
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(553, 553)
+        Me.Controls.Add(Me.PhoneBox)
         Me.Controls.Add(Me.ToolStripMenu)
         Me.Controls.Add(Me.MemberListBox)
-        Me.Controls.Add(Me.PhoneBox)
         Me.Controls.Add(Me.NameBox)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
+        Me.KeyPreview = True
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ToolStripMenu.ResumeLayout(False)
         Me.ToolStripMenu.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
-        Me.KeyPreview = True
 
     End Sub
 
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents NameBox As TextBox
-    Friend WithEvents PhoneBox As TextBox
     Friend WithEvents MemberListBox As ListBox
     Friend WithEvents UpdateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ModifyToolStripMenuItem As ToolStripMenuItem
@@ -154,4 +154,5 @@ Partial Class Form1
     Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenu As MenuStrip
+    Friend WithEvents PhoneBox As MaskedTextBox
 End Class

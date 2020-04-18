@@ -1,4 +1,8 @@
-﻿Public Class Form1
+﻿'Jennifer Pezzulo
+'April 18th, 2020
+'Chapter 9 Excercise
+
+Public Class Form1
 
     'Create a structure to hold names and phone numbers
     Structure Membership
@@ -64,6 +68,14 @@
         membershipInfo(UpperBound).phone = phone
 
         'Update list box with membership data
+
+        'Clear input fields to be ready for next entry
+        NameBox.Clear()
+        PhoneBox.Clear()
+        'Set focus to namebox
+        NameBox.Select()
+
+
         ShowMembership()
     End Sub
 
@@ -76,6 +88,31 @@
 
         'update listbox 
         ShowMembership()
+    End Sub
+
+    Private Sub ExitProgram()
+        'Prompt to save with msg box
+        Dim message As String
+        Dim title As String
+        Dim style As MsgBoxStyle
+        Dim response As MsgBoxResult
+
+        message = "Save before exiting?"
+        style = MsgBoxStyle.DefaultButton2 Or MsgBoxStyle.Critical Or MsgBoxStyle.YesNo
+
+        title = "Save Before Exiting"
+
+        response = MsgBox(message, style, title)
+
+        If response = MsgBoxResult.Yes Then
+
+            SaveFile()
+            End
+
+        Else
+            End
+
+        End If
     End Sub
 
     'Sub routine to handle selecting items in listbox
@@ -187,13 +224,11 @@
 
     End Sub
 
-    
+
     Private Sub AddToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles AddToolStripMenuItem.Click
         'Run add sub routine when menu item clicked
         Add()
-        'Clear input fields to be ready for next entry
-        NameBox.Clear()
-        PhoneBox.Clear()
+
 
     End Sub
 
@@ -210,28 +245,8 @@
 
     Private Sub SaveToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
 
-        'Prompt to save with msg box
-        Dim message As String
-        Dim title As String
-        Dim style As MsgBoxStyle
-        Dim response As MsgBoxResult
+        ExitProgram()
 
-        message = "Save before exiting?"
-        style = MsgBoxStyle.DefaultButton2 Or MsgBoxStyle.Critical Or MsgBoxStyle.YesNo
-
-        title = "Save Before Exiting"
-
-        response = MsgBox(message, style, title)
-
-        If response = MsgBoxResult.Yes Then
-
-            SaveFile()
-            End
-
-        Else
-            End
-
-        End If
     End Sub
     'Sub routne to save the file
     Sub SaveFile()
@@ -265,6 +280,9 @@
                 Return True
             Case Keys.F3
                 Delete()
+                Return True
+            Case Keys.F9
+                ExitProgram()
                 Return True
             Case Else
                 Exit Select

@@ -1,6 +1,8 @@
 ﻿'Jennifer Pezzulo
-'April 18th, 2020
-'Chapter 9 Excercise
+'April 18, 2020
+'Intro to MS Visual Basic.net
+'Module 4 Assignment 2: Chapter 9 Exercise 1 (Membership list)
+
 
 Public Class Form1
 

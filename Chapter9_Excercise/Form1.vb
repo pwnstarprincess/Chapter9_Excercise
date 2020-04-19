@@ -98,7 +98,6 @@ Public Class MembershipForm
         PhoneBox.Clear()
         'Set focus to namebox
         NameBox.Select()
-
         ShowMembership()
     End Sub
 
@@ -178,15 +177,15 @@ Public Class MembershipForm
 
             'load data into membership info
             For numberMember As Integer = 0 To UpperBound
-                    membershipInfo(numberMember).name = readStream.ReadLine
-                    membershipInfo(numberMember).phone = readStream.ReadLine
-                Next
-                'close the stream
-                readStream.Close()
-            Else
+                membershipInfo(numberMember).name = readStream.ReadLine
+                membershipInfo(numberMember).phone = readStream.ReadLine
+            Next
+            'close the stream
+            readStream.Close()
+        Else
 
-                'if the file does not exist prompt the user to create
-                Dim message As String
+            'if the file does not exist prompt the user to create
+            Dim message As String
             Dim title As String
             Dim style As MsgBoxStyle
             Dim response As MsgBoxResult
@@ -214,13 +213,14 @@ Public Class MembershipForm
     End Sub
 
     'Sub routine to show membership names
+    'Sub routine to show membership names
     Sub ShowMembership()
         'Clear the listbox
         MemberListBox.Items.Clear()
         'As Long as there are members...
-        For numberMember As Integer = 0 To membershipInfo.GetUpperBound(0)
+        For numberMember As Integer = 0 To UpperBound
             'As long as we have not hit the upper bound
-            For index As Integer = 1 To membershipInfo.GetUpperBound(0)
+            For index As Integer = 1 To UpperBound
                 'Sort alphabetically
                 If (membershipInfo(index - 1).name > membershipInfo(index).name) Then
                     SwapData(index)
@@ -229,18 +229,10 @@ Public Class MembershipForm
 
             Next
         Next
-
-
         'Display the membership data...
-        For numberMember As Integer = 0 To membershipInfo.GetUpperBound(0)
-            If Not String.IsNullOrEmpty(membershipInfo(numberMember).name) Then
-                MemberListBox.Items.Add(String.Format(outputFormat, membershipInfo(numberMember).name))
-            End If
-
-
+        For numberMember As Integer = 0 To UpperBound
+            MemberListBox.Items.Add(String.Format(outputFormat, membershipInfo(numberMember).name))
         Next
-
-        UpperBound = membershipInfo.GetUpperBound(0)
 
     End Sub
 

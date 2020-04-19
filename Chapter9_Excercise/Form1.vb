@@ -4,7 +4,7 @@
 'Module 4 Assignment 2: Chapter 9 Exercise 1 (Membership list)
 
 
-Public Class Form1
+Public Class MembershipForm
 
     'Create a structure to hold names and phone numbers
     Structure Membership
@@ -295,8 +295,3 @@ Public Class Form1
     End Function
 
 End Class
-
-
-
-
-

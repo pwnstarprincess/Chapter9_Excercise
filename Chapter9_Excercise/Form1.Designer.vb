@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class MembershipForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -121,9 +121,9 @@ Partial Class Form1
         Me.PhoneBox.Mask = "000-0000"
         Me.PhoneBox.Name = "PhoneBox"
         Me.PhoneBox.Size = New System.Drawing.Size(100, 26)
-        Me.PhoneBox.TabIndex = 8
+        Me.PhoneBox.TabIndex = 3
         '
-        'Form1
+        'MembershipForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -135,8 +135,8 @@ Partial Class Form1
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.KeyPreview = True
-        Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Name = "MembershipForm"
+        Me.Text = "Membership"
         Me.ToolStripMenu.ResumeLayout(False)
         Me.ToolStripMenu.PerformLayout()
         Me.ResumeLayout(False)

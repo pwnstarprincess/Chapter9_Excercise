@@ -21,14 +21,14 @@ Public Class MembershipForm
     'holds index of phone number
     Private phoneTextBoxArray As Integer
     'Initialize structure
-    Private membershipInfo(99) As Membership
+    Private membershipInfo(0) As Membership
 
     'Variable to hold format for output data
     Private outputFormat As String = "{0,-20}"
 
     'Sub routine called at load
     Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        ReDim Preserve membershipInfo(0)
         'Load and show the membership data
         LoadMembership()
         ShowMembership()
@@ -54,6 +54,7 @@ Public Class MembershipForm
     'Sub routine to be called when selecting Add from the form menu
     Private Sub Add()
 
+
         'Declare variables to hold textbox data
         Dim name As String
         Dim phone As String
@@ -64,6 +65,9 @@ Public Class MembershipForm
 
         'Increment upper bound
         UpperBound += 1
+
+        ReDim Preserve membershipInfo(UpperBound)
+
 
         'Add name and phone number to membership structure
         membershipInfo(UpperBound).name = name
@@ -87,8 +91,14 @@ Public Class MembershipForm
         'Remove selected data from membership data
         membershipInfo(nameTextBoxArray).name = Nothing
         membershipInfo(phoneTextBoxArray).phone = Nothing
-
         'update listbox 
+
+        'Clear input fields to be ready for next entry
+        NameBox.Clear()
+        PhoneBox.Clear()
+        'Set focus to namebox
+        NameBox.Select()
+
         ShowMembership()
     End Sub
 
@@ -124,9 +134,13 @@ Public Class MembershipForm
         nameTextBoxArray = MemberListBox.SelectedIndex
         phoneTextBoxArray = MemberListBox.SelectedIndex
 
-        NameBox.Text = MemberListBox.SelectedItem
-        PhoneBox.Text = membershipInfo(phoneTextBoxArray).phone
+        If MemberListBox.SelectedIndex < 0 Then
+            MsgBox("Please select a value")
+        Else
 
+            NameBox.Text = MemberListBox.SelectedItem
+            PhoneBox.Text = membershipInfo(phoneTextBoxArray).phone
+        End If
 
     End Sub
 
@@ -154,20 +168,25 @@ Public Class MembershipForm
             'Close the stream
             readStream.Close()
             'upper bound is one less than the number of lines
-            UpperBound = numLines - 1
+
+            If numLines > 0 Then
+                UpperBound = numLines - 1
+            End If
             readStream = IO.File.OpenText("membership.txt")
+
+            ReDim Preserve membershipInfo(UpperBound)
 
             'load data into membership info
             For numberMember As Integer = 0 To UpperBound
-                membershipInfo(numberMember).name = readStream.ReadLine
-                membershipInfo(numberMember).phone = readStream.ReadLine
-            Next
-            'close the stream
-            readStream.Close()
-        Else
+                    membershipInfo(numberMember).name = readStream.ReadLine
+                    membershipInfo(numberMember).phone = readStream.ReadLine
+                Next
+                'close the stream
+                readStream.Close()
+            Else
 
-            'if the file does not exist prompt the user to create
-            Dim message As String
+                'if the file does not exist prompt the user to create
+                Dim message As String
             Dim title As String
             Dim style As MsgBoxStyle
             Dim response As MsgBoxResult
@@ -199,9 +218,9 @@ Public Class MembershipForm
         'Clear the listbox
         MemberListBox.Items.Clear()
         'As Long as there are members...
-        For numberMember As Integer = 0 To UpperBound
+        For numberMember As Integer = 0 To membershipInfo.GetUpperBound(0)
             'As long as we have not hit the upper bound
-            For index As Integer = 1 To UpperBound
+            For index As Integer = 1 To membershipInfo.GetUpperBound(0)
                 'Sort alphabetically
                 If (membershipInfo(index - 1).name > membershipInfo(index).name) Then
                     SwapData(index)
@@ -210,10 +229,18 @@ Public Class MembershipForm
 
             Next
         Next
+
+
         'Display the membership data...
-        For numberMember As Integer = 0 To UpperBound
-            MemberListBox.Items.Add(String.Format(outputFormat, membershipInfo(numberMember).name))
+        For numberMember As Integer = 0 To membershipInfo.GetUpperBound(0)
+            If Not String.IsNullOrEmpty(membershipInfo(numberMember).name) Then
+                MemberListBox.Items.Add(String.Format(outputFormat, membershipInfo(numberMember).name))
+            End If
+
+
         Next
+
+        UpperBound = membershipInfo.GetUpperBound(0)
 
     End Sub
 

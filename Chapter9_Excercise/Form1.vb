@@ -6,7 +6,7 @@
 
 Public Class MembershipForm
 
-    'Create a structure to hold names and phone numbers
+    'Create a structure to names and phone numbers
     Structure Membership
         Dim name As String
         Dim phone As String
@@ -28,10 +28,9 @@ Public Class MembershipForm
 
     'Sub routine called at load
     Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ReDim Preserve membershipInfo(0)
         'Load and show the membership data
-        LoadMembership()
-        ShowMembership()
+        'LoadMembership()
+        'ShowMembership()
 
     End Sub
 
@@ -63,12 +62,6 @@ Public Class MembershipForm
         name = NameBox.Text
         phone = PhoneBox.Text
 
-        'Increment upper bound
-        UpperBound += 1
-
-        ReDim Preserve membershipInfo(UpperBound)
-
-
         'Add name and phone number to membership structure
         membershipInfo(UpperBound).name = name
         membershipInfo(UpperBound).phone = phone
@@ -81,6 +74,8 @@ Public Class MembershipForm
         'Set focus to namebox
         NameBox.Select()
 
+        UpperBound += 1
+        ReDim Preserve membershipInfo(UpperBound)
 
         ShowMembership()
     End Sub
@@ -88,10 +83,37 @@ Public Class MembershipForm
     'Sub routine to be called when selecting Delete from the form menu
     Private Sub Delete()
 
+        Dim newUpperBound As Integer
+        MsgBox(membershipInfo.Length)
+
         'Remove selected data from membership data
         membershipInfo(nameTextBoxArray).name = Nothing
         membershipInfo(phoneTextBoxArray).phone = Nothing
-        'update listbox 
+
+        Dim currentUpperBound As Integer = membershipInfo.GetUpperBound(0)
+
+        ReDim Preserve membershipInfo(membershipInfo.GetUpperBound(0) + 1)
+
+        membershipInfo(membershipInfo.Length - 1) = membershipInfo(nameTextBoxArray)
+        For i As Integer = nameTextBoxArray To currentUpperBound
+
+            membershipInfo(i) = membershipInfo(i + 1)
+
+        Next
+
+        For numberMember As Integer = 0 To membershipInfo.GetUpperBound(0)
+            If Not membershipInfo(numberMember).name = Nothing Then
+                newUpperBound += 1
+            End If
+        Next
+
+
+
+        ReDim Preserve membershipInfo(newUpperBound)
+
+        UpperBound = membershipInfo.GetUpperBound(0)
+
+        MsgBox(membershipInfo.Length)
 
         'Clear input fields to be ready for next entry
         NameBox.Clear()
@@ -133,6 +155,8 @@ Public Class MembershipForm
         nameTextBoxArray = MemberListBox.SelectedIndex
         phoneTextBoxArray = MemberListBox.SelectedIndex
 
+        MsgBox(nameTextBoxArray)
+
         If MemberListBox.SelectedIndex < 0 Then
             MsgBox("Please select a value")
         Else
@@ -170,7 +194,12 @@ Public Class MembershipForm
 
             If numLines > 0 Then
                 UpperBound = numLines - 1
+
+            ElseIf numLines <= 0 Then
+                UpperBound = 0
+
             End If
+
             readStream = IO.File.OpenText("membership.txt")
 
             ReDim Preserve membershipInfo(UpperBound)
@@ -217,21 +246,26 @@ Public Class MembershipForm
     Sub ShowMembership()
         'Clear the listbox
         MemberListBox.Items.Clear()
+
+
         'As Long as there are members...
         For numberMember As Integer = 0 To UpperBound
-            'As long as we have not hit the upper bound
-            For index As Integer = 1 To UpperBound
-                'Sort alphabetically
-                If (membershipInfo(index - 1).name > membershipInfo(index).name) Then
+                'As long as we have not hit the upper bound
+                For index As Integer = 1 To UpperBound
+                    'Sort alphabetically
+                    If (membershipInfo(index - 1).name > membershipInfo(index).name) Then
                     SwapData(index)
                 Else
-                End If
+                    End If
 
+                Next
             Next
-        Next
+
         'Display the membership data...
         For numberMember As Integer = 0 To UpperBound
+
             MemberListBox.Items.Add(String.Format(outputFormat, membershipInfo(numberMember).name))
+
         Next
 
     End Sub

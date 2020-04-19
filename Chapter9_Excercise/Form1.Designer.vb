@@ -74,7 +74,7 @@ Partial Class MembershipForm
         '
         Me.UpdateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ModifyToolStripMenuItem, Me.AddToolStripMenuItem, Me.DeleteToolStripMenuItem})
         Me.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
-        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(86, 29)
+        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(86, 32)
         Me.UpdateToolStripMenuItem.Text = "Update"
         '
         'ModifyToolStripMenuItem
@@ -101,7 +101,7 @@ Partial Class MembershipForm
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(55, 29)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(55, 32)
         Me.SaveToolStripMenuItem.Text = "Exit"
         '
         'ToolStripMenu
@@ -111,7 +111,7 @@ Partial Class MembershipForm
         Me.ToolStripMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UpdateToolStripMenuItem, Me.SaveToolStripMenuItem})
         Me.ToolStripMenu.Location = New System.Drawing.Point(0, 0)
         Me.ToolStripMenu.Name = "ToolStripMenu"
-        Me.ToolStripMenu.Size = New System.Drawing.Size(553, 33)
+        Me.ToolStripMenu.Size = New System.Drawing.Size(553, 36)
         Me.ToolStripMenu.TabIndex = 7
         Me.ToolStripMenu.Text = "MenuStrip1"
         '
